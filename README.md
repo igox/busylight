@@ -67,7 +67,7 @@ You can try to reach the web UI @ `http://busylight-esp32.local`.
 
 
 # MuteDeck integration
-The `api/mutedeck-webhook` endpoint aims to collect [MuteDeck](https://mutedeck.com/help/docs/notifications.html#enabling-the-webhook-integration) webhook callbacks.
+The `POST api/mutedeck-webhook` endpoint aims to collect [MuteDeck](https://mutedeck.com/help/docs/notifications.html#enabling-the-webhook-integration) webhook callbacks.
 
 It will automatically switch to the BusyLight in:
 - busy mode (Red color) when entering a meeting with Mic `ON` **and** camera `ON`.
