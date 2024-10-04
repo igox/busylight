@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+   <head>
+      <title>BusyLight</title>
+      <script src="static/busylight-api.js"></script>
+      <script src="static/jscolor.min.js"></script>
+
+   </head>
+   <body onload="initForm()">
+      <h1>Status</h1>
+      <section>
+
+         <div>
+            <input type="radio" name="status" id="off" value="off" onclick="putStatus(this.value)" />
+            <label for="off">OFF</label>
+         </div>
+        
+         <div>
+            <input type="radio" name="status" id="busy" value="busy" onclick="putStatus(this.value)" />
+            <label for="busy">Busy</label>
+         </div>
+
+         <div>
+            <input type="radio" name="status" id="available" value="available" onclick="putStatus(this.value)" />
+            <label for="available">Available</label>
+         </div>
+
+         <div>
+            <input type="radio" name="status" id="away" value="away" onclick="putStatus(this.value)" />
+            <label for="away">Away</label>
+         </div>
+
+         <div>
+            <input type="radio" name="status" id="colored" value="colored" onclick="openColorPicker()" />
+            <label for="colored">Colored: </label>
+            <button id="colorPicker">Pick color</button>
+         </div>
+
+         <div>
+            <input type="range" id="brightness" name="brightness" min="0" max="100" step="1" onchange="putBrightness(this.value)"/>
+            <label for="brightness">Brightness</label>
+         </div>
+      </section>
+
+      <script>
+         jscolor.presets.rgb = {
+            format: 'rgb',
+            alphaChannel: false
+         };
+
+         //var colorPicker = new JSColor("colorPicker", "{preset:'default', onChange: 'putColor(this)'}")
+         var colorPickerOpts = {};
+         colorPickerOpts["preset"] = "rgb";
+         colorPickerOpts["format"] = "rgb";
+         colorPickerOpts["alphaChannel"] = false;
+         colorPickerOpts["onChange"] = "putColor(this)";
+         var colorPicker = new JSColor("#colorPicker", colorPickerOpts);
+         
+         async function initForm() {
+            var s =  await getStatus();
+            var c = await getColor();
+            var b = await getBrightness();
+
+            var statusRadio;
+            switch (s.status) {
+               case 'off':
+                  statusRadio = document.getElementById('off');
+                  break;
+               case 'busy':
+                  statusRadio = document.getElementById('busy');
+                  break;
+               case 'available':
+                  statusRadio = document.getElementById('available');
+                  break;
+               case 'away':
+                  statusRadio = document.getElementById('away');
+                  break;
+               case 'colored':
+                  statusRadio = document.getElementById('colored');
+                  colorPicker.fromString('rgb(' + c.color.r + ',' + c.color.g + ',' + c.color.b + ')');
+                  break;
+            }
+            statusRadio.checked = true;
+
+            brightnessRange = document.getElementById('brightness');
+            brightnessRange.value = b.brightness * 100;
+
+            setColorPickerColor(s.status);
+         }
+
+         function openColorPicker() {
+            colorPicker.show();
+         }
+
+         async function putColor(picker) {
+            var color = {};
+            color.r = Math.round(picker.channel('R'));
+            color.g = Math.round(picker.channel('G'));
+            color.b = Math.round(picker.channel('B'));
+            var s = await setColor(color);
+            statusRadio = document.getElementById('colored');
+            statusRadio.checked = true;
+         }
+
+
+         async function putStatus(status) {
+            var s = await setStatus(status);
+            setColorPickerColor(status);
+         }
+
+         function setColorPickerColor(status) {
+            switch (status) {
+               case 'off':
+                  colorPicker.fromString('rgb(0,0,0)');
+                  break;
+               case 'busy':
+                  colorPicker.fromString('rgb(255,0,0)');
+                  break;
+               case 'available':
+                  colorPicker.fromString('rgb(0,255,0)');
+                  break;
+               case 'away':
+                  colorPicker.fromString('rgb(246,190,0)');
+                  break;              
+            }
+         }
+
+         async function putBrightness(value) {
+            var brightness = {};
+            brightness.brightness = value/100;
+            var b = await setBrightness(brightness);
+         }
+      </script>
+
+   </body>
+</html>

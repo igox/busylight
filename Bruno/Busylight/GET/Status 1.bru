@@ -1,0 +1,24 @@
+meta {
+  name: Status 1
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://{{IP}}/api/status/1
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "r": 255,
+    "g": 255,
+    "b": 255,
+    "brightness": 0.5
+  }
+}

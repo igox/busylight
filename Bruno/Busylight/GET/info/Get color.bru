@@ -1,0 +1,24 @@
+meta {
+  name: Get color
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://{{IP}}/api/color
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "r": 55,
+    "g": 0,
+    "b": 0,
+    "brightness": 0.5
+  }
+}
