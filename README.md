@@ -36,6 +36,24 @@ You can try to reach the web UI @ [http://igox-busylight.local](http://igox-busy
 |---------------------------|
 | ![Web UI](img/web-ui.png) |
 
+# BusyLight Buddy — companion app
+
+**BusyLight Buddy** is a free, open-source multiplatform companion app to control your BusyLight from your phone or computer — no browser needed.
+
+Available for **iOS**, **iPadOS**, **Android**, **macOS**, and **Windows**.
+
+Key features:
+- Quick status presets (Available, Away, Busy, On, Off) with one tap
+- Custom color picker with named presets
+- Background polling — status stays in sync automatically
+- Start with session (macOS & Windows) — runs silently in the menu bar / system tray
+
+[![iOS / macOS / iPadOS](https://img.shields.io/badge/iOS%20%7C%20macOS%20%7C%20iPadOS-Source-000000?style=flat-square&logo=apple&logoColor=white)](https://github.com/igox/busylight-buddy)
+[![Android](https://img.shields.io/badge/Android-APK-3DDC84?style=flat-square&logo=android&logoColor=white)](https://github.com/igox/busylight-buddy/raw/main/downloads/org.igox.apps.android.busylight-buddy-release.apk)
+[![Windows](https://img.shields.io/badge/Windows-Installer-0078D4?style=flat-square&logo=windows&logoColor=white)](https://github.com/igox/busylight-buddy/raw/main/downloads/BusyLight-Buddy-Installer.exe)
+
+→ [github.com/igox/busylight-buddy](https://github.com/igox/busylight-buddy)
+
 # Stream Deck plug-in
 You can download a Stream Deck plugin to control your BusyLight:
 
